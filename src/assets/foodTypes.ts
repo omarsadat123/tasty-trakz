@@ -15,4 +15,10 @@ export const foodTypes: FoodType[] = [
   { id: 7, name: "Healthy", icon: "🥗" },
   { id: 8, name: "Drinks", icon: "🥤" },
   { id: 9, name: "Breakfast", icon: "🍳" },
+  { id: 10, name: "Italian", icon: "🍝" },
+  { id: 11, name: "Mexican", icon: "🌮" },
+  { id: 12, name: "Indian", icon: "🍛" },
+  { id: 13, name: "Seafood", icon: "🦞" },
+  { id: 14, name: "Vegetarian", icon: "🥬" },
+  { id: 15, name: "Japanese", icon: "🍱" },
 ];

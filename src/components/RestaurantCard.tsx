@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Clock, Star, ArrowUpRight } from "lucide-react";
 import { Restaurant } from "@/assets/restaurantData";
+import { Link } from "react-router-dom";
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
@@ -71,10 +72,13 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
             <span className="font-medium">{restaurant.minOrder}</span>
           </div>
           
-          <button className="flex items-center gap-1 text-sm font-medium text-brand-orange group-hover:underline transition-all">
+          <Link 
+            to={`/restaurant/${restaurant.id}`}
+            className="flex items-center gap-1 text-sm font-medium text-brand-orange group-hover:underline transition-all"
+          >
             View Menu 
             <ArrowUpRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </button>
+          </Link>
         </div>
       </div>
     </div>

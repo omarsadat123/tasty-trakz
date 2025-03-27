@@ -2,13 +2,21 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import { MenuItem } from "@/assets/restaurantData";
+import { useCart } from "@/context/CartContext";
 
 interface FoodCardProps {
   item: MenuItem;
+  restaurantId: number;
+  restaurantName: string;
 }
 
-const FoodCard = ({ item }: FoodCardProps) => {
+const FoodCard = ({ item, restaurantId, restaurantName }: FoodCardProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const { addToCart } = useCart();
+  
+  const handleAddToCart = () => {
+    addToCart(item, restaurantId, restaurantName);
+  };
   
   return (
     <div className="relative flex flex-col overflow-hidden bg-white rounded-xl shadow-card group">
@@ -37,6 +45,7 @@ const FoodCard = ({ item }: FoodCardProps) => {
           <button 
             className="flex items-center justify-center w-10 h-10 rounded-full bg-brand-orange text-white shadow-md transform transition-transform hover:scale-105 hover:shadow-lg focus:outline-none"
             aria-label={`Add ${item.name} to cart`}
+            onClick={handleAddToCart}
           >
             <Plus className="h-5 w-5" />
           </button>
