@@ -3,35 +3,19 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { foodTypes } from "@/assets/foodTypes";
-import { Restaurant } from "@/assets/restaurantData";
+import { Restaurant, restaurants } from "@/assets/restaurantData";
 import { Search } from "lucide-react";
-import FoodCard from "@/components/FoodCard";
 import Footer from "@/components/Footer";
 
 const Index = () => {
   const navigate = useNavigate();
-  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedFoodType, setSelectedFoodType] = useState("All");
   const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>([]);
 
   useEffect(() => {
-    // Fetch restaurants from API or local storage
-    const fetchRestaurants = async () => {
-      try {
-        const response = await fetch("/restaurants.json");
-        const data = await response.json();
-        setRestaurants(data);
-      } catch (error) {
-        console.error("Error fetching restaurants:", error);
-        // Fallback to local storage or use imported data
-        import("@/assets/restaurantData").then(module => {
-          setRestaurants(module.restaurants);
-        });
-      }
-    };
-
-    fetchRestaurants();
+    // Initialize restaurants from imported data
+    setFilteredRestaurants(restaurants);
   }, []);
 
   useEffect(() => {
@@ -51,7 +35,7 @@ const Index = () => {
     }
 
     setFilteredRestaurants(results);
-  }, [searchTerm, selectedFoodType, restaurants]);
+  }, [searchTerm, selectedFoodType]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
