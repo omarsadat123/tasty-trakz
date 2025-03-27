@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
@@ -23,7 +24,10 @@ const Index = () => {
         setRestaurants(data);
       } catch (error) {
         console.error("Error fetching restaurants:", error);
-        // Fallback to local storage or display an error message
+        // Fallback to local storage or use imported data
+        import("@/assets/restaurantData").then(module => {
+          setRestaurants(module.restaurants);
+        });
       }
     };
 
@@ -42,7 +46,7 @@ const Index = () => {
 
     if (selectedFoodType !== "All") {
       results = results.filter((restaurant) =>
-        restaurant.foodTypes.includes(selectedFoodType)
+        restaurant.cuisine.includes(selectedFoodType)
       );
     }
 
@@ -116,12 +120,36 @@ const Index = () => {
             <h2 className="text-xl font-semibold mb-3">Popular Restaurants</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredRestaurants.map((restaurant) => (
-                <FoodCard 
-                  key={restaurant.id} 
-                  item={restaurant}
-                  restaurantId={restaurant.id}
-                  restaurantName={restaurant.name}
-                />
+                <div 
+                  key={restaurant.id}
+                  className="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer transition-transform hover:scale-105"
+                  onClick={() => navigate(`/restaurant/${restaurant.id}`)}
+                >
+                  <div className="h-48 relative">
+                    <img 
+                      src={restaurant.image} 
+                      alt={restaurant.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-2 right-2 bg-white px-2 py-1 rounded-full text-xs font-semibold">
+                      ⭐ {restaurant.rating}
+                    </div>
+                    {restaurant.featured && (
+                      <div className="absolute top-2 left-2 bg-brand-orange px-2 py-1 rounded-full text-xs font-semibold text-white">
+                        Featured
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-semibold text-lg mb-1">{restaurant.name}</h3>
+                    <p className="text-sm text-gray-500 mb-2">{restaurant.cuisine}</p>
+                    <div className="flex justify-between text-xs text-gray-500">
+                      <span>🕒 {restaurant.deliveryTime}</span>
+                      <span>💰 {restaurant.deliveryFee}</span>
+                      <span>🛒 Min: {restaurant.minOrder}</span>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
