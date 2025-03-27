@@ -9,8 +9,7 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <div className="flex items-center mb-4">
-              <span className="text-xl font-bold text-brand-orange mr-1">Tasty</span>
-              <span className="text-xl font-bold">Trakz</span>
+              <span className="text-xl font-bold text-brand-orange">Chayan</span>
             </div>
             <p className="text-gray-600 mb-4">
               Delivering the best food right to your doorstep. Fast delivery, exceptional taste.
@@ -110,8 +109,8 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 text-brand-orange mr-2" />
-                <a href="mailto:info@tastytrakz.com" className="text-gray-600 hover:text-brand-orange transition-colors">
-                  info@tastytrakz.com
+                <a href="mailto:info@chayan.com" className="text-gray-600 hover:text-brand-orange transition-colors">
+                  info@chayan.com
                 </a>
               </li>
             </ul>
@@ -119,7 +118,7 @@ const Footer = () => {
         </div>
         
         <div className="mt-12 pt-8 border-t border-gray-100 text-center text-gray-500 text-sm">
-          <p>&copy; {new Date().getFullYear()} TastyTrakz. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Chayan. All rights reserved.</p>
         </div>
       </div>
     </footer>
