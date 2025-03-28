@@ -6,6 +6,7 @@ import { foodTypes } from "@/assets/foodTypes";
 import { Restaurant, restaurants } from "@/assets/restaurantData";
 import { Search } from "lucide-react";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -47,8 +48,11 @@ const Index = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
+      {/* Navbar */}
+      <Navbar />
+      
       {/* Header */}
-      <header className="bg-white py-4 shadow-md">
+      <header className="bg-white py-4 shadow-md mt-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo */}
@@ -100,7 +104,7 @@ const Index = () => {
           </div>
 
           {/* Restaurant Cards */}
-          <div>
+          <div id="restaurants">
             <h2 className="text-xl font-semibold mb-3">Popular Restaurants</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredRestaurants.map((restaurant) => (

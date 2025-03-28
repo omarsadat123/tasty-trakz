@@ -14,7 +14,8 @@ const FoodCard = ({ item, restaurantId, restaurantName }: FoodCardProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const { addToCart } = useCart();
   
-  const handleAddToCart = () => {
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent navigation when clicking the add to cart button
     addToCart(item, restaurantId, restaurantName);
   };
   

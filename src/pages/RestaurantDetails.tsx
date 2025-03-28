@@ -4,6 +4,8 @@ import { useParams, Link } from "react-router-dom";
 import { restaurants, Restaurant } from "@/assets/restaurantData";
 import { Clock, Star, MapPin, ArrowLeft } from "lucide-react";
 import FoodCard from "@/components/FoodCard";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const RestaurantDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -27,18 +29,24 @@ const RestaurantDetails = () => {
   
   if (!restaurant) {
     return (
-      <div className="container mx-auto px-4 py-16 text-center">
-        <h2 className="text-2xl font-bold mb-2">Restaurant not found</h2>
-        <p className="text-gray-600 mb-6">The restaurant you're looking for doesn't exist or has been removed.</p>
-        <Link to="/" className="text-brand-orange hover:underline">Go back to home page</Link>
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <div className="container mx-auto px-4 py-16 text-center flex-grow">
+          <h2 className="text-2xl font-bold mb-2">Restaurant not found</h2>
+          <p className="text-gray-600 mb-6">The restaurant you're looking for doesn't exist or has been removed.</p>
+          <Link to="/" className="text-brand-orange hover:underline">Go back to home page</Link>
+        </div>
+        <Footer />
       </div>
     );
   }
   
   return (
-    <div className="pb-16">
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      
       {/* Restaurant Header */}
-      <div className="relative h-64 md:h-80 lg:h-96 w-full overflow-hidden">
+      <div className="relative h-64 md:h-80 lg:h-96 w-full overflow-hidden mt-16">
         <img 
           src={restaurant.image} 
           alt={restaurant.name}
@@ -73,7 +81,7 @@ const RestaurantDetails = () => {
       </div>
       
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 flex-grow">
         <div className="flex flex-col md:flex-row gap-8">
           {/* Category Navigation */}
           <div className="md:w-1/4">
@@ -124,6 +132,8 @@ const RestaurantDetails = () => {
           </div>
         </div>
       </div>
+      
+      <Footer />
     </div>
   );
 };

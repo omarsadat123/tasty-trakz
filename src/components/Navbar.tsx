@@ -1,10 +1,11 @@
 
 import { useState, useEffect } from "react";
-import { Search, Menu, X, ShoppingCart, Home, Phone } from "lucide-react";
+import { Search, Menu, X, Home, Phone } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
+import CartIcon from "./CartIcon";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -70,21 +71,7 @@ const Navbar = () => {
               <SearchBar />
             </div>
             
-            <Link 
-              to="/cart" 
-              className="p-2 rounded-full hover:bg-gray-100 transition-colors relative"
-              aria-label="View cart"
-            >
-              <ShoppingCart className="h-5 w-5" />
-              {cartItemCount > 0 && (
-                <Badge 
-                  className="absolute -top-1 -right-1 flex items-center justify-center h-5 w-5 p-0 bg-brand-orange text-white" 
-                  variant="destructive"
-                >
-                  {cartItemCount}
-                </Badge>
-              )}
-            </Link>
+            <CartIcon className="p-2 rounded-full hover:bg-gray-100 transition-colors" />
             
             {/* Mobile menu button */}
             <button
@@ -118,7 +105,7 @@ const Navbar = () => {
               className="flex items-center p-3 rounded-md hover:bg-gray-50 transition-colors"
               onClick={toggleMenu}
             >
-              <ShoppingCart className="h-4 w-4 mr-3" />
+              <Search className="h-4 w-4 mr-3" />
               <span className="text-sm font-medium">Restaurants</span>
             </a>
             <a 
@@ -150,8 +137,8 @@ const Navbar = () => {
               className="flex items-center p-3 rounded-md hover:bg-gray-50 transition-colors mt-1 border-t border-gray-100 pt-4"
               onClick={toggleMenu}
             >
-              <ShoppingCart className="h-4 w-4 mr-3" />
-              <span className="text-sm font-medium">Cart</span>
+              <CartIcon showCount={false} />
+              <span className="text-sm font-medium ml-3">Cart</span>
               {cartItemCount > 0 && (
                 <Badge 
                   className="ml-2 bg-brand-orange text-white" 
